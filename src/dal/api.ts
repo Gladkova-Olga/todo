@@ -18,9 +18,8 @@ export const authAPI = {
             captcha,
         };
         return (
-            instance.post<typeof payload, AxiosResponse<{ userId: number }>>("auth/login", payload)
+            instance.post<typeof payload, AxiosResponse<ResponseType<{ userId: number }>>>("auth/login", payload)
         )
-
     },
     me() {
         return (
@@ -28,14 +27,20 @@ export const authAPI = {
         )
     },
     logOut() {
-        instance.delete<{}, AxiosResponse<any>>("auth/login")
+        return (
+            instance.delete<{}, AxiosResponse<ResponseType>>("auth/login")
+        )
     }
-
 
 }
 
 type AuthResponseType = {
-    id: number,
-    email: string,
+    id: number
+    email: string
     login: string
+}
+type ResponseType<D = {}> = {
+    resultCode: number
+    messages: string[]
+    data: D
 }
