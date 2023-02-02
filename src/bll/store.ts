@@ -1,12 +1,15 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
-import thunkMiddleware from "redux-thunk";
+import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
+import thunkMiddleware, { ThunkDispatch } from "redux-thunk";
 import {loginReducer} from "./loginReducer";
+import {useDispatch} from "react-redux";
 
 const reducers = combineReducers({
     login: loginReducer,
 })
 
-const store = createStore(reducers, applyMiddleware(thunkMiddleware))
+const store = createStore(reducers, applyMiddleware(thunkMiddleware));
+
+export const useAppDispatch: () => ThunkDispatch<AppStoreType, any, AnyAction> = useDispatch
 
 export default store;
 

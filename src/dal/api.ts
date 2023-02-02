@@ -10,7 +10,7 @@ const instance = axios.create({
 
 
 export const authAPI = {
-    login(email: string, password: string, rememberME: boolean, captcha?: boolean) {
+    login(email: string, password: string, rememberME: boolean, captcha?: string) {
         const payload = {
             email,
             password,

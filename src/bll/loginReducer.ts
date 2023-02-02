@@ -1,5 +1,7 @@
-import {Dispatch} from "redux";
+import {AnyAction, Dispatch} from "redux";
+import { ThunkAction } from "redux-thunk";
 import {authAPI} from "../dal/api";
+import {AppStoreType} from "./store";
 
 type ThunkDispatch = Dispatch<ActionLoginType>
 type InitialStateType = typeof initialState;
@@ -28,8 +30,9 @@ export const setIsLoggedIn = (isLoggedIn: boolean) => {
     } as const)
 }
 
-export const login = (email: string, password: string, rememberMe: boolean, captcha?: boolean) => {
+export const login = (email: string, password: string, rememberMe: boolean, captcha?: string) => {
     return (dispatch: ThunkDispatch) => {
+        debugger
         authAPI.login(email, password, rememberMe, captcha)
             .then(res => {
                 if(res.data.resultCode === 0) {
