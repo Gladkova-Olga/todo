@@ -1,0 +1,9 @@
+.headerBlock {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 10px;
+    align-items: center;
+    background-color: #f1f1f5;
+    min-width: 100vh;
+    height: 3vh;
+}
