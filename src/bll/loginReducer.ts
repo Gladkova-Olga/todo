@@ -32,7 +32,6 @@ export const setIsLoggedIn = (isLoggedIn: boolean) => {
 
 export const login = (email: string, password: string, rememberMe: boolean, captcha?: string) => {
     return (dispatch: ThunkDispatch) => {
-        debugger
         authAPI.login(email, password, rememberMe, captcha)
             .then(res => {
                 if(res.data.resultCode === 0) {

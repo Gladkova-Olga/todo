@@ -2,8 +2,9 @@
 function TodoLists() {
     return (
         <div>
-            TodoLists
+            TodoLists!
         </div>
     )
 
 }
+export default TodoLists
