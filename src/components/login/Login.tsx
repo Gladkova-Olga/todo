@@ -2,7 +2,7 @@ import {useSelector} from "react-redux";
 import {AppStoreType, useAppDispatch} from "../../bll/store";
 import {useFormik} from "formik";
 import {login} from "../../bll/loginReducer";
-import {Navigate, useNavigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {PATH} from "../routes/RoutesForApp";
 
 type FormikErrorType = {
