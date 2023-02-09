@@ -1,7 +1,5 @@
-import {AnyAction, Dispatch} from "redux";
-import { ThunkAction } from "redux-thunk";
+import {Dispatch} from "redux";
 import {authAPI} from "../dal/api";
-import {AppStoreType} from "./store";
 
 type ThunkDispatch = Dispatch<ActionLoginType>
 type InitialStateType = typeof initialState;

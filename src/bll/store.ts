@@ -2,9 +2,11 @@ import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
 import thunkMiddleware, { ThunkDispatch } from "redux-thunk";
 import {loginReducer} from "./loginReducer";
 import {useDispatch} from "react-redux";
+import {todoListReducer} from "./todoListReducer";
 
 const reducers = combineReducers({
     login: loginReducer,
+    todoList: todoListReducer,
 })
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));
