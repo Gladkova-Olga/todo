@@ -10,7 +10,7 @@ type ThunkDispatch = Dispatch<ActionTodoListType>
 
 const initialState: TodoListType[] = []
 
-export const todoListReducer = (state: typeof initialState = initialState, action: ActionTodoListType) => {
+export const todoListReducer = (state: typeof initialState = initialState, action: ActionTodoListType): typeof initialState => {
     switch (action.type) {
         case "TODOLIST/SET-TODOLISTS": {
             return action.todoLists
