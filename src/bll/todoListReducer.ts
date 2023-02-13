@@ -1,10 +1,10 @@
 import {todoListAPI, TodoListType} from "../dal/api";
 import {Dispatch} from "redux";
 
-type SetTodoListsType = ReturnType<typeof setTodoLists>
-type CreateTodoListType = ReturnType<typeof createTodoList>
+export type SetTodoListsType = ReturnType<typeof setTodoLists>
+export type CreateTodoListType = ReturnType<typeof createTodoList>
 type UpdateTodoListTitleType = ReturnType<typeof updateTodoListTitle>
-type DeleteTodoList = ReturnType<typeof deleteTodoList>
+export type DeleteTodoList = ReturnType<typeof deleteTodoList>
 type ActionTodoListType = SetTodoListsType | CreateTodoListType | UpdateTodoListTitleType | DeleteTodoList
 type ThunkDispatch = Dispatch<ActionTodoListType>
 
