@@ -1,7 +1,17 @@
-export const Task = () => {
+import {TaskType} from "../../../../dal/api";
+
+type PropsType = {
+    task: TaskType
+
+}
+
+
+export const Task = ({task}: PropsType) => {
     return (
         <div>
-            Task
+            <input type={'checkbox'}/>
+            <span>{task.title}</span>
+            <button>delete</button>
         </div>
     )
 }

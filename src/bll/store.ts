@@ -3,10 +3,12 @@ import thunkMiddleware, { ThunkDispatch } from "redux-thunk";
 import {loginReducer} from "./loginReducer";
 import {useDispatch} from "react-redux";
 import {todoListReducer} from "./todoListReducer";
+import {taskReducer} from "./taskReducer";
 
 const reducers = combineReducers({
     login: loginReducer,
     todoList: todoListReducer,
+    task: taskReducer
 })
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));

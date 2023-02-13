@@ -15,7 +15,7 @@ type ActionsTaskType =
     | DeleteTodoList
     | SetTodoListsType
 
-type TaskStateType = {
+export type TaskStateType = {
     [key: string]: TaskType[]
 }
 type ThunkDispatch = Dispatch<ActionsTaskType>
