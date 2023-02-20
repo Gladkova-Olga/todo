@@ -45,6 +45,7 @@ function TodoLists() {
                                            tasks={tasks[tl.id]}
                                            addTask={addTask}
                                            deleteTask={deleteTask}
+                                           deleteTodoList={deleteTodoList}
             />)}
         </div>
     )} else {return <Login/>}
