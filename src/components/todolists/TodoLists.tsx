@@ -6,8 +6,9 @@ import {TodoListType} from "../../dal/api";
 import {createTask, removeTask, TaskStateType} from "../../bll/taskReducer";
 import {TodoList} from "./todoList/TodoList";
 import {useEffect} from "react";
-import {fetchTodoLists, removeTodoList} from "../../bll/todoListReducer";
+import {addTodoList, fetchTodoLists, removeTodoList} from "../../bll/todoListReducer";
 import Login from "../login/Login";
+import {AddItemForm} from "../utils/addItemForm/AddItemForm";
 
 function TodoLists() {
     const dispatch = useAppDispatch();
@@ -29,6 +30,9 @@ function TodoLists() {
     const deleteTodoList = (todoListID: string) => {
         dispatch(removeTodoList(todoListID))
     }
+    const createTodoList = (todoListTitle: string) => {
+        dispatch(addTodoList(todoListTitle));
+    }
 
     // if (!isLoggedIn) return (
        // <Navigate to={PATH.LOGIN}/>
@@ -39,7 +43,7 @@ function TodoLists() {
     if(isLoggedIn){
         return (
         <div>
-            <button>Add TodoList</button>
+            <AddItemForm onClickAdd={createTodoList}/>
             {todolists.map(tl => <TodoList key={tl.id}
                                            todolist={tl}
                                            tasks={tasks[tl.id]}

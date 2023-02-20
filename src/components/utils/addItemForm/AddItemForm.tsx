@@ -15,9 +15,11 @@ export const AddItemForm = ({onClickAdd}: PropsType) => {
         setValue("");
     }
     const onPressEnter = (e: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
-        if(e.key === "Enter")
-        onClickAdd(value);
-        setValue("");
+        if(e.key === "Enter") {
+            onClickAdd(value);
+            setValue("");
+        }
+
     }
 
 
