@@ -78,7 +78,7 @@ export const changeTodoListTitle = (id: string, title: string) => {
     return (dispatch: ThunkDispatch) => {
         todoListAPI.updateTodolist(id, title)
             .then(res => {
-                dispatch(updateTodoListTitle(res.data.data.item.id, res.data.data.item.title))
+                dispatch(updateTodoListTitle(id, title))
             })
     }
 }

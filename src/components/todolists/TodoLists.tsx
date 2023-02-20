@@ -6,7 +6,7 @@ import {TodoListType} from "../../dal/api";
 import {createTask, removeTask, TaskStateType} from "../../bll/taskReducer";
 import {TodoList} from "./todoList/TodoList";
 import {useEffect} from "react";
-import {addTodoList, fetchTodoLists, removeTodoList} from "../../bll/todoListReducer";
+import {addTodoList, changeTodoListTitle, fetchTodoLists, removeTodoList} from "../../bll/todoListReducer";
 import Login from "../login/Login";
 import {AddItemForm} from "../utils/addItemForm/AddItemForm";
 
@@ -16,8 +16,8 @@ function TodoLists() {
     const todolists = useSelector<AppStoreType, TodoListType[]>(state => state.todoList);
     const tasks = useSelector<AppStoreType, TaskStateType>(state => state.tasks);
 
-    useEffect(() =>  {
-            dispatch(fetchTodoLists())
+    useEffect(() => {
+        dispatch(fetchTodoLists())
     }, []);
 
 
@@ -33,26 +33,32 @@ function TodoLists() {
     const createTodoList = (todoListTitle: string) => {
         dispatch(addTodoList(todoListTitle));
     }
+    const updateTodoListTitle = (todoListID: string, todoListTitle: string) => {
+        dispatch(changeTodoListTitle(todoListID, todoListTitle));
+    }
 
     // if (!isLoggedIn) return (
-       // <Navigate to={PATH.LOGIN}/>
+    // <Navigate to={PATH.LOGIN}/>
     // )
 
 
-
-    if(isLoggedIn){
+    if (isLoggedIn) {
         return (
-        <div>
-            <AddItemForm onClickAdd={createTodoList}/>
-            {todolists.map(tl => <TodoList key={tl.id}
-                                           todolist={tl}
-                                           tasks={tasks[tl.id]}
-                                           addTask={addTask}
-                                           deleteTask={deleteTask}
-                                           deleteTodoList={deleteTodoList}
-            />)}
-        </div>
-    )} else {return <Login/>}
+            <div>
+                <AddItemForm onClickAdd={createTodoList}/>
+                {todolists.map(tl => <TodoList key={tl.id}
+                                               todolist={tl}
+                                               tasks={tasks[tl.id]}
+                                               addTask={addTask}
+                                               deleteTask={deleteTask}
+                                               deleteTodoList={deleteTodoList}
+                                               updateTodoListTitle={updateTodoListTitle}
+                />)}
+            </div>
+        )
+    } else {
+        return <Login/>
+    }
 
 }
 
