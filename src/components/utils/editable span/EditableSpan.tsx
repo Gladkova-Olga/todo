@@ -31,16 +31,12 @@ export const EditableSpan = ({title, onChangeTitle}: PropsType) => {
 
     if (!editMode) {
         return (
-            <div onDoubleClick={onDoubleClickHandler}>
-                <span>{title}</span>
-            </div>
+                <span onDoubleClick={onDoubleClickHandler}>{title}</span>
         )
     } else {
         return (
-            <div>
                 <input onChange={onChangeHandler} value={editedTitle} onKeyPress={onEnterPressHandler}
                        onBlur={onBlurHandler}/>
-            </div>
         )
     }
 }

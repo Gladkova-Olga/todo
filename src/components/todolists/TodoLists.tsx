@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../routes/RoutesForApp";
 import {TodoListType} from "../../dal/api";
-import {createTask, removeTask, TaskStateType} from "../../bll/taskReducer";
+import {changeTask, createTask, removeTask, TaskStateType} from "../../bll/taskReducer";
 import {TodoList} from "./todoList/TodoList";
 import {useEffect} from "react";
 import {addTodoList, changeTodoListTitle, fetchTodoLists, removeTodoList} from "../../bll/todoListReducer";
@@ -26,6 +26,9 @@ function TodoLists() {
     }
     const deleteTask = (todoListID: string, taskID: string) => {
         dispatch(removeTask(todoListID, taskID));
+    }
+    const changeTaskTitle = (todoListID: string, taskID: string, taskTitle: string) => {
+        dispatch(changeTask(todoListID, taskID, {title: taskTitle}))
     }
     const deleteTodoList = (todoListID: string) => {
         dispatch(removeTodoList(todoListID))
@@ -53,6 +56,7 @@ function TodoLists() {
                                                deleteTask={deleteTask}
                                                deleteTodoList={deleteTodoList}
                                                updateTodoListTitle={updateTodoListTitle}
+                                               changeTaskTitle = {changeTaskTitle}
                 />)}
             </div>
         )

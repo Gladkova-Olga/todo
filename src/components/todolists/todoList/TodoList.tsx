@@ -13,6 +13,7 @@ type PropsType = {
     deleteTask: (todolistID: string, taskID: string) => void
     deleteTodoList: (todoListID: string) => void
     updateTodoListTitle: (todoListID: string, todoListTitle: string) => void
+    changeTaskTitle: (todoListID: string, taskID: string, taskTitle: string) => void
 }
 
 export const TodoList = React.memo(function ({
@@ -21,11 +22,11 @@ export const TodoList = React.memo(function ({
                                                  deleteTask,
                                                  addTask,
                                                  deleteTodoList,
-                                                 updateTodoListTitle
+                                                 updateTodoListTitle,
+                                                 changeTaskTitle,
                                              }: PropsType) {
     const dispatch = useAppDispatch();
 
-console.log("todo")
     useEffect(() => {
         dispatch(fetchTask(todolist.id))
     }, []);
@@ -48,7 +49,7 @@ console.log("todo")
             <AddItemForm onClickAdd={addTaskHandler}/>
 
             <div>
-                {tasks.map(t => <Task key={t.id} task={t} deleteTask={deleteTask}/>)}
+                {tasks.map(t => <Task key={t.id} task={t} deleteTask={deleteTask} changeTaskTitle={changeTaskTitle}/>)}
             </div>
         </div>
 )
