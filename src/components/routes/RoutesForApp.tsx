@@ -15,7 +15,8 @@ function RoutesForApp() {
     return (
         <div>
             <Routes>
-                <Route path={'/'} element={<Navigate to={PATH.LOGIN} replace={true}/> }/>
+                {/*<Route path={'/'} element={<Navigate to={PATH.LOGIN} replace={true}/> }/>*/}
+                <Route path={"/"} element={<Login/>}/>
                 <Route path={PATH.LOGIN} element={<Login/>}/>
                 <Route path={PATH.TODOLISTS} element={<TodoLists/>}/>
                 {/*<Route path={PATH.TASK} element={<Task/>}/>*/}

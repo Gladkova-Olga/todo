@@ -1,11 +1,13 @@
-import {taskAPI, TaskType, UpdateTaskModelType} from "../dal/api";
+import {taskAPI, TaskType, TodoListType, UpdateTaskModelType} from "../dal/api";
 import {Dispatch} from "redux";
 import {CreateTodoListType, DeleteTodoList, SetTodoListsType} from "./todoListReducer";
+import {AppStoreType} from "./store";
 
 type SetTasksType = ReturnType<typeof setTasks>
 type AddTaskType = ReturnType<typeof addTask>
 type UpdateTaskType = ReturnType<typeof updateTask>
 type DeleteTaskType = ReturnType<typeof deleteTask>
+export type SetEmptyTasksType = ReturnType<typeof setEmptyTasks>
 type ActionsTaskType =
     SetTasksType
     | AddTaskType
@@ -14,6 +16,8 @@ type ActionsTaskType =
     | CreateTodoListType
     | DeleteTodoList
     | SetTodoListsType
+    | SetEmptyTasksType
+
 
 export type TaskStateType = {
     [key: string]: TaskType[]
@@ -50,10 +54,10 @@ export const taskReducer = (state: TaskStateType = initialState, action: Actions
             delete copyState[action.id];
             return copyState
         }
-        case "TODOLIST/SET-TODOLISTS": {
+        case "SET-EMPTY-TASKS": {
             const copyState = {...state};
             action.todoLists.forEach(tl => copyState[tl.id] = []
-        )
+            )
             return copyState
         }
 
@@ -82,13 +86,19 @@ const deleteTask = (todoListID: string, taskID: string) => {
         type: "TASK/DELETE-TASK", todoListID, taskID
     } as const)
 }
+export const setEmptyTasks = (todoLists: TodoListType[]) => {
+    return ({
+        type: "SET-EMPTY-TASKS", todoLists
+    } as const)
+}
 
 
 export const fetchTask = (todoListID: string) => {
-    return (dispatch: ThunkDispatch) => {
+    return (dispatch: ThunkDispatch, getState: () => AppStoreType) => {
         taskAPI.getTasks(todoListID)
             .then((res) => {
-                dispatch(setTasks(res.data.items, todoListID))
+                dispatch(setTasks(res.data.items, todoListID));
+                // console.log(getState())
             })
     }
 }

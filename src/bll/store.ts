@@ -8,7 +8,7 @@ import {taskReducer} from "./taskReducer";
 const reducers = combineReducers({
     login: loginReducer,
     todoList: todoListReducer,
-    task: taskReducer
+    tasks: taskReducer
 })
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));

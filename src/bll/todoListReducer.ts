@@ -1,11 +1,17 @@
 import {todoListAPI, TodoListType} from "../dal/api";
 import {Dispatch} from "redux";
+import {setEmptyTasks, SetEmptyTasksType} from "./taskReducer";
 
 export type SetTodoListsType = ReturnType<typeof setTodoLists>
 export type CreateTodoListType = ReturnType<typeof createTodoList>
 type UpdateTodoListTitleType = ReturnType<typeof updateTodoListTitle>
 export type DeleteTodoList = ReturnType<typeof deleteTodoList>
-type ActionTodoListType = SetTodoListsType | CreateTodoListType | UpdateTodoListTitleType | DeleteTodoList
+type ActionTodoListType =
+    SetTodoListsType
+    | CreateTodoListType
+    | UpdateTodoListTitleType
+    | DeleteTodoList
+    | SetEmptyTasksType
 type ThunkDispatch = Dispatch<ActionTodoListType>
 
 const initialState: TodoListType[] = []
@@ -13,7 +19,7 @@ const initialState: TodoListType[] = []
 export const todoListReducer = (state: typeof initialState = initialState, action: ActionTodoListType): typeof initialState => {
     switch (action.type) {
         case "TODOLIST/SET-TODOLISTS": {
-            return action.todoLists
+            return action.todoLists.map(tl => ({...tl, filter: "all"}))
         }
         case "TODOLIST/CREATE-TODOLIST": {
             return [{...action.todoList}, ...state]
@@ -56,6 +62,7 @@ export const fetchTodoLists = () => {
         todoListAPI.getTodoLists()
             .then((res) => {
                 dispatch(setTodoLists(res.data))
+                dispatch(setEmptyTasks(res.data))
             })
     }
 }
